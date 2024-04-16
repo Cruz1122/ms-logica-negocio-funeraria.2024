@@ -6,6 +6,6 @@ export * from './facturacion.repository';
 export * from './pago.repository';
 export * from './plan.repository';
 export * from './planx-servicio.repository';
-export * from './registrox-servicio.repository';
+export * from './registro-servicio.repository';
 export * from './servicio-funerario.repository';
 export * from './servicio.repository';

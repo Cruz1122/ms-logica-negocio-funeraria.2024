@@ -6,6 +6,6 @@ export * from './facturacion.model';
 export * from './pago.model';
 export * from './plan.model';
 export * from './planx-servicio.model';
-export * from './registrox-servicio.model';
+export * from './registro-servicio.model';
 export * from './servicio-funerario.model';
 export * from './servicio.model';
