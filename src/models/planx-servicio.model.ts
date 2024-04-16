@@ -9,6 +9,15 @@ export class PlanxServicio extends Entity {
   })
   id?: number;
 
+  @property({
+    type: 'number',
+  })
+  idPlan?: number;
+
+  @property({
+    type: 'number',
+  })
+  idServicio?: number;
 
   constructor(data?: Partial<PlanxServicio>) {
     super(data);

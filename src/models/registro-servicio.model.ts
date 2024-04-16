@@ -1,7 +1,8 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {ServicioFunerario} from './servicio-funerario.model';
 
 @model()
-export class RegistroxServicio extends Entity {
+export class RegistroServicio extends Entity {
   @property({
     type: 'number',
     id: true,
@@ -37,14 +38,17 @@ export class RegistroxServicio extends Entity {
   })
   code: string;
 
+  @belongsTo(() => ServicioFunerario, {name: 'servicioFunerario'})
+  idServicioFunerario: number;
 
-  constructor(data?: Partial<RegistroxServicio>) {
+  constructor(data?: Partial<RegistroServicio>) {
     super(data);
   }
 }
 
-export interface RegistroxServicioRelations {
+export interface RegistroServicioRelations {
   // describe navigational properties here
 }
 
-export type RegistroxServicioWithRelations = RegistroxServicio & RegistroxServicioRelations;
+export type RegistroServicioWithRelations = RegistroServicio &
+  RegistroServicioRelations;
