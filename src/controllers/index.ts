@@ -27,3 +27,4 @@ export * from './pago.controller';
 export * from './servicio.controller';
 export * from './servicio-funerario.controller';
 export * from './registro-servicio.controller';
+export * from './administrador-de-archivos.controller';
