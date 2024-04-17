@@ -4,17 +4,15 @@ import {EstadoBeneficiario} from './estado-beneficiario.model';
 
 @model({
   settings: {
-    foreignKeys:
-    {
+    foreignKeys: {
       fk_beneficiario_idCliente: {
-        name: "fk_beneficiario_idCliente",
-        entity: "Cliente",
-        entityKey: "id",
-        foreignKey: "idCliente"
-      }
-    }
-
-  }
+        name: 'fk_beneficiario_idCliente',
+        entity: 'Cliente',
+        entityKey: 'id',
+        foreignKey: 'idCliente',
+      },
+    },
+  },
 })
 export class Beneficiario extends Entity {
   @property({
