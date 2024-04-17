@@ -11,7 +11,13 @@ import {EstadoBeneficiario} from './estado-beneficiario.model';
         entity: "Cliente",
         entityKey: "id",
         foreignKey: "idCliente"
-      }
+      },
+      fk_beneficiario_idEstadoBeneficiario: {
+        name: "fk_beneficiario_idEstadoBeneficiario",
+        entity: "EstadoBeneficiario",
+        entityKey: "id",
+        foreignKey: "idEstadoBeneficiario"
+      },
     }
 
   }
