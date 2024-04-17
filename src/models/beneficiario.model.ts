@@ -4,16 +4,16 @@ import {EstadoBeneficiario} from './estado-beneficiario.model';
 
 @model({
   settings: {
-    foreingKeys: [
-      {
-        fk_beneficiario_idCliente: {
-          name: "fk_beneficiario_idCliente",
-          entity: "Cliente",
-          entityKey: "id",
-          foreingKey: "idCliente"
-        }
+    foreignKeys:
+    {
+      fk_beneficiario_idCliente: {
+        name: "fk_beneficiario_idCliente",
+        entity: "Cliente",
+        entityKey: "id",
+        foreignKey: "idCliente"
       }
-    ]
+    }
+
   }
 })
 export class Beneficiario extends Entity {
