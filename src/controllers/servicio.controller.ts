@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -7,24 +8,25 @@ import {
   Where,
 } from '@loopback/repository';
 import {
-  post,
-  param,
+  del,
   get,
   getModelSchemaRef,
+  param,
   patch,
+  post,
   put,
-  del,
   requestBody,
   response,
 } from '@loopback/rest';
+import {ConfiguracionSeguridad} from '../config/configuracion.seguridad';
 import {Servicio} from '../models';
 import {ServicioRepository} from '../repositories';
 
 export class ServicioController {
   constructor(
     @repository(ServicioRepository)
-    public servicioRepository : ServicioRepository,
-  ) {}
+    public servicioRepository: ServicioRepository,
+  ) { }
 
   @post('/servicio')
   @response(200, {
@@ -58,6 +60,10 @@ export class ServicioController {
     return this.servicioRepository.count(where);
   }
 
+  @authenticate({
+    strategy: 'auth',
+    options: [ConfiguracionSeguridad.permisoServicioId, ConfiguracionSeguridad.listarAccion],
+  })
   @get('/servicio')
   @response(200, {
     description: 'Array of Servicio model instances',
