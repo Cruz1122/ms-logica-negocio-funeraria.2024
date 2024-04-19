@@ -1,6 +1,7 @@
 import {Entity, belongsTo, hasMany, model, property} from '@loopback/repository';
 import {Plan} from './plan.model';
 import {RegistroServicio} from './registro-servicio.model';
+import {Resena} from './resena.model';
 
 @model({
   settings: {
@@ -38,6 +39,9 @@ export class ServicioFunerario extends Entity {
 
   @hasMany(() => RegistroServicio, {keyTo: 'idServicioFunerario'})
   registrosServicios: RegistroServicio[];
+
+  @hasMany(() => Resena, {keyTo: 'idServicioFunerario'})
+  resenas: Resena[];
 
   constructor(data?: Partial<ServicioFunerario>) {
     super(data);

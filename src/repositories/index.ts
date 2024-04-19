@@ -9,3 +9,4 @@ export * from './planx-servicio.repository';
 export * from './registro-servicio.repository';
 export * from './servicio-funerario.repository';
 export * from './servicio.repository';
+export * from './resena.repository';

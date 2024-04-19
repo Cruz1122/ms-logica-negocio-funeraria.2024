@@ -28,3 +28,6 @@ export * from './servicio.controller';
 export * from './servicio-funerario.controller';
 export * from './registro-servicio.controller';
 export * from './administrador-de-archivos.controller';
+export * from './resena-servicio-funerario.controller';
+export * from './servicio-funerario-resena.controller';
+export * from './resena.controller';
