@@ -10,3 +10,4 @@ export * from './registro-servicio.repository';
 export * from './servicio-funerario.repository';
 export * from './servicio.repository';
 export * from './resena.repository';
+export * from './pqrs.repository';

@@ -31,3 +31,4 @@ export * from './administrador-de-archivos.controller';
 export * from './resena-servicio-funerario.controller';
 export * from './servicio-funerario-resena.controller';
 export * from './resena.controller';
+export * from './pqrs.controller';

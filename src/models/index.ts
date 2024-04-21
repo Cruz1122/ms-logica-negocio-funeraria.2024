@@ -10,3 +10,4 @@ export * from './registro-servicio.model';
 export * from './servicio-funerario.model';
 export * from './servicio.model';
 export * from './resena.model';
+export * from './pqrs.model';
