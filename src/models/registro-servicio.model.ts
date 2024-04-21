@@ -3,16 +3,15 @@ import {ServicioFunerario} from './servicio-funerario.model';
 
 @model({
   settings: {
-    foreignKeys:
-    {
+    foreignKeys: {
       fk_RegistroServicio_idServicioFunerario: {
-        name: "fk_RegistroServicio_idServicioFunerario",
-        entity: "ServicioFunerario",
-        entityKey: "id",
-        foreignKey: "idServicioFunerario"
+        name: 'fk_RegistroServicio_idServicioFunerario',
+        entity: 'ServicioFunerario',
+        entityKey: 'id',
+        foreignKey: 'idServicioFunerario',
       },
-    }
-  }
+    },
+  },
 })
 export class RegistroServicio extends Entity {
   @property({
@@ -29,7 +28,8 @@ export class RegistroServicio extends Entity {
   fecha: string;
 
   @property({
-    type: 'date',
+    type: 'string',
+    format: 'time',
     required: true,
   })
   hora: string;
