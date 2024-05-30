@@ -1,3 +1,4 @@
+import {service} from '@loopback/core';
 import {
   Count,
   CountSchema,
@@ -7,26 +8,25 @@ import {
   Where,
 } from '@loopback/repository';
 import {
-  post,
-  param,
+  del,
   get,
   getModelSchemaRef,
+  param,
   patch,
+  post,
   put,
-  del,
   requestBody,
   response,
 } from '@loopback/rest';
+import {ConfiguracionNotificaciones} from '../config/notificaciones.config';
 import {Pqrs} from '../models';
 import {PqrsRepository} from '../repositories';
-import { ConfiguracionNotificaciones } from '../config/notificaciones.config';
-import { service } from '@loopback/core';
-import { NotificacionesService } from '../services';
+import {NotificacionesService} from '../services';
 
 export class PqrsController {
   constructor(
     @repository(PqrsRepository)
-    public pqrsRepository : PqrsRepository,
+    public pqrsRepository: PqrsRepository,
     @service(NotificacionesService)
     public servicioNotificaciones: NotificacionesService,
   ) {}
@@ -49,12 +49,29 @@ export class PqrsController {
     })
     pqrs: Omit<Pqrs, 'id'>,
   ): Promise<Pqrs> {
+    if (pqrs.mensaje != '') {
+      throw new Error('El mensaje es requerido');
+    }
     let datosEmail = {
-      destination: "funerariadigitalpqrs@gmail.com",
-      message: "Tipo de Usuario: "+pqrs.tipoUsuario+" Documento: "+pqrs.documento+" Correo: "+pqrs.email+" Nombre Completo: "+pqrs.nombres + " "+ pqrs.apellidos+" Telefono: "+pqrs.telefono+" Mensaje: "+pqrs.mensaje,
+      destination: 'funerariadigitalpqrs@gmail.com',
+      message:
+        'Tipo de Usuario: ' +
+        pqrs.tipoUsuario +
+        ' Documento: ' +
+        pqrs.documento +
+        ' Correo: ' +
+        pqrs.email +
+        ' Nombre Completo: ' +
+        pqrs.nombres +
+        ' ' +
+        pqrs.apellidos +
+        ' Telefono: ' +
+        pqrs.telefono +
+        ' Mensaje: ' +
+        pqrs.mensaje,
       subject: pqrs.asunto,
     };
-    let urlEmail = ConfiguracionNotificaciones.urlEmail
+    let urlEmail = ConfiguracionNotificaciones.urlEmail;
     console.log('Datos de notificación ', datosEmail);
     console.log('URL ', urlEmail);
     this.servicioNotificaciones.EnviarNotificacion(datosEmail, urlEmail);
@@ -67,9 +84,7 @@ export class PqrsController {
     description: 'Pqrs model count',
     content: {'application/json': {schema: CountSchema}},
   })
-  async count(
-    @param.where(Pqrs) where?: Where<Pqrs>,
-  ): Promise<Count> {
+  async count(@param.where(Pqrs) where?: Where<Pqrs>): Promise<Count> {
     return this.pqrsRepository.count(where);
   }
 
@@ -85,9 +100,7 @@ export class PqrsController {
       },
     },
   })
-  async find(
-    @param.filter(Pqrs) filter?: Filter<Pqrs>,
-  ): Promise<Pqrs[]> {
+  async find(@param.filter(Pqrs) filter?: Filter<Pqrs>): Promise<Pqrs[]> {
     return this.pqrsRepository.find(filter);
   }
 
@@ -121,7 +134,7 @@ export class PqrsController {
   })
   async findById(
     @param.path.number('id') id: number,
-    @param.filter(Pqrs, {exclude: 'where'}) filter?: FilterExcludingWhere<Pqrs>
+    @param.filter(Pqrs, {exclude: 'where'}) filter?: FilterExcludingWhere<Pqrs>,
   ): Promise<Pqrs> {
     return this.pqrsRepository.findById(id, filter);
   }
