@@ -49,9 +49,6 @@ export class PqrsController {
     })
     pqrs: Omit<Pqrs, 'id'>,
   ): Promise<Pqrs> {
-    if (pqrs.mensaje != '') {
-      throw new Error('El mensaje es requerido');
-    }
     let datosEmail = {
       destination: 'funerariadigitalpqrs@gmail.com',
       message:
@@ -65,8 +62,6 @@ export class PqrsController {
         pqrs.nombres +
         ' ' +
         pqrs.apellidos +
-        ' Telefono: ' +
-        pqrs.telefono +
         ' Mensaje: ' +
         pqrs.mensaje,
       subject: pqrs.asunto,
