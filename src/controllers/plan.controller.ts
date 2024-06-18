@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -7,24 +8,31 @@ import {
   Where,
 } from '@loopback/repository';
 import {
-  post,
-  param,
+  del,
   get,
   getModelSchemaRef,
+  param,
   patch,
+  post,
   put,
-  del,
   requestBody,
   response,
 } from '@loopback/rest';
+import {ConfiguracionSeguridad} from '../config/configuracion.seguridad';
 import {Plan} from '../models';
 import {PlanRepository} from '../repositories';
 
 export class PlanController {
   constructor(
     @repository(PlanRepository)
-    public planRepository : PlanRepository,
-  ) {}
+    public planRepository: PlanRepository,
+  ) { }
+
+  @authenticate({
+    strategy: 'auth',
+    options: [ConfiguracionSeguridad.menuPlanId, ConfiguracionSeguridad.guardarAccion],
+  })
+
 
   @post('/plan')
   @response(200, {
@@ -75,6 +83,36 @@ export class PlanController {
   ): Promise<Plan[]> {
     return this.planRepository.find(filter);
   }
+
+  @authenticate({
+    strategy: 'auth',
+    options: [ConfiguracionSeguridad.menuPlanId, ConfiguracionSeguridad.listarAccion],
+  })
+
+  @get('/plan-paginado')
+  @response(200, {
+    description: 'Array of Plan model instances',
+    content: {
+      'application/json': {
+        schema: {
+          type: 'array',
+          items: getModelSchemaRef(Plan, {includeRelations: true}),
+        },
+      },
+    },
+  })
+  async findToPagination(
+    @param.filter(Plan) filter?: Filter<Plan>,
+  ): Promise<object> {
+    let total: number = (await this.planRepository.count()).count;
+    let registros: Plan[] = await this.planRepository.find(filter);
+    let respuesta = {
+      registros: registros,
+      totalRegistros: total
+    }
+    return respuesta;
+  }
+
 
   @patch('/plan')
   @response(200, {
