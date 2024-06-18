@@ -11,3 +11,4 @@ export * from './servicio-funerario.model';
 export * from './servicio.model';
 export * from './resena.model';
 export * from './pqrs.model';
+export * from './paginador-cliente.model';
