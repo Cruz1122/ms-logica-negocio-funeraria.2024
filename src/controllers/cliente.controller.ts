@@ -27,6 +27,7 @@ export class ClienteController {
     @repository(ClienteRepository)
     public clienteRepository: ClienteRepository,
   ) { }
+
   @authenticate({
     strategy: 'auth',
     options: [ConfiguracionSeguridad.menuClienteId, ConfiguracionSeguridad.guardarAccion],
