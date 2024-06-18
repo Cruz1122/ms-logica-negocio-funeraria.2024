@@ -1,4 +1,3 @@
-import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -18,7 +17,6 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {ConfiguracionSeguridad} from '../config/configuracion.seguridad';
 import {Plan} from '../models';
 import {PlanRepository} from '../repositories';
 
@@ -28,12 +26,10 @@ export class PlanController {
     public planRepository: PlanRepository,
   ) { }
 
-  @authenticate({
+  /*@authenticate({
     strategy: 'auth',
     options: [ConfiguracionSeguridad.menuPlanId, ConfiguracionSeguridad.guardarAccion],
-  })
-
-
+  })*/
   @post('/plan')
   @response(200, {
     description: 'Plan model instance',
@@ -84,10 +80,10 @@ export class PlanController {
     return this.planRepository.find(filter);
   }
 
-  @authenticate({
+  /*@authenticate({
     strategy: 'auth',
     options: [ConfiguracionSeguridad.menuPlanId, ConfiguracionSeguridad.listarAccion],
-  })
+  })*/
 
   @get('/plan-paginado')
   @response(200, {
