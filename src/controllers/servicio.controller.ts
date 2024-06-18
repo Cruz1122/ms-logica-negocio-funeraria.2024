@@ -60,10 +60,7 @@ export class ServicioController {
     return this.servicioRepository.count(where);
   }
 
-  @authenticate({
-    strategy: 'auth',
-    options: [ConfiguracionSeguridad.permisoServicioId, ConfiguracionSeguridad.listarAccion],
-  })
+
   @get('/servicio')
   @response(200, {
     description: 'Array of Servicio model instances',

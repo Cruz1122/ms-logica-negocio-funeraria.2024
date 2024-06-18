@@ -53,6 +53,11 @@ export class ClienteController {
     return this.clienteRepository.create(cliente);
   }
 
+  @authenticate({
+    strategy: 'auth',
+    options: [ConfiguracionSeguridad.menuClienteId, ConfiguracionSeguridad.listarAccion],
+  })
+
   @get('/cliente/count')
   @response(200, {
     description: 'Cliente model count',
