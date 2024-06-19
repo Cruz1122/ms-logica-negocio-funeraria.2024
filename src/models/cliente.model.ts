@@ -1,6 +1,6 @@
-import {Entity, model, property, hasOne, hasMany} from '@loopback/repository';
-import {ClientePlan} from './cliente-plan.model';
+import {Entity, hasMany, hasOne, model, property} from '@loopback/repository';
 import {Beneficiario} from './beneficiario.model';
+import {ClientePlan} from './cliente-plan.model';
 
 @model()
 export class Cliente extends Entity {
@@ -40,6 +40,12 @@ export class Cliente extends Entity {
     required: true,
   })
   fechaRegistro: string;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
+  correo: string;
 
   @hasOne(() => ClientePlan, {keyTo: 'idCliente'})
   clientePlan: ClientePlan;
