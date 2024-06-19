@@ -1,4 +1,3 @@
-import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -18,7 +17,6 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {ConfiguracionSeguridad} from '../config/configuracion.seguridad';
 import {Cliente, PaginadorCliente} from '../models';
 import {ClienteRepository} from '../repositories';
 
@@ -26,12 +24,15 @@ export class ClienteController {
   constructor(
     @repository(ClienteRepository)
     public clienteRepository: ClienteRepository,
-  ) { }
+  ) {}
 
-  @authenticate({
+  /*@authenticate({
     strategy: 'auth',
-    options: [ConfiguracionSeguridad.menuClienteId, ConfiguracionSeguridad.guardarAccion],
-  })
+    options: [
+      ConfiguracionSeguridad.menuClienteId,
+      ConfiguracionSeguridad.guardarAccion,
+    ],
+  })*/
   @post('/cliente')
   @response(200, {
     description: 'Cliente model instance',
@@ -53,22 +54,20 @@ export class ClienteController {
     return this.clienteRepository.create(cliente);
   }
 
+  /*
   @authenticate({
     strategy: 'auth',
     options: [ConfiguracionSeguridad.menuClienteId, ConfiguracionSeguridad.listarAccion],
-  })
+  })*/
 
   @get('/cliente/count')
   @response(200, {
     description: 'Cliente model count',
     content: {'application/json': {schema: CountSchema}},
   })
-  async count(
-    @param.where(Cliente) where?: Where<Cliente>,
-  ): Promise<Count> {
+  async count(@param.where(Cliente) where?: Where<Cliente>): Promise<Count> {
     return this.clienteRepository.count(where);
   }
-
 
   @get('/cliente')
   @response(200, {
@@ -82,15 +81,13 @@ export class ClienteController {
       },
     },
   })
-  async find(
-    @param.filter(Cliente) filter?: Filter<Cliente>,
-  ): Promise<object> {
+  async find(@param.filter(Cliente) filter?: Filter<Cliente>): Promise<object> {
     let total: number = (await this.clienteRepository.count()).count;
     let registros: Cliente[] = await this.clienteRepository.find(filter);
     let respuesta = {
       registros: registros,
-      totalRegistros: total
-    }
+      totalRegistros: total,
+    };
     return respuesta;
   }
 
@@ -124,7 +121,8 @@ export class ClienteController {
   })
   async findById(
     @param.path.number('id') id: number,
-    @param.filter(Cliente, {exclude: 'where'}) filter?: FilterExcludingWhere<Cliente>
+    @param.filter(Cliente, {exclude: 'where'})
+    filter?: FilterExcludingWhere<Cliente>,
   ): Promise<Cliente> {
     return this.clienteRepository.findById(id, filter);
   }
